@@ -1,0 +1,75 @@
+<template>
+  <button
+    :class="[roundKeyClass, getClassForColor]"
+    :disabled="disabled"
+    @click="$emit('handleKeyClick', keyTitle)"
+  >
+    {{ keyTitle }}
+  </button>
+</template>
+
+<script>
+export default {
+  name: 'RoundKey',
+  props: {
+    keyTitle: String,
+    disabled: Boolean,
+  },
+  data() {
+    return {
+      numberColorClass: 'green',
+      stringColorClass: 'grey',
+      roundKeyClass: 'round-key',
+    };
+  },
+  computed: {
+    getClassForColor() {
+      if (this.keyTitle === '') {
+        return 'blank';
+      } else if (parseInt(this.keyTitle) || this.keyTitle === '0') {
+        return 'orange';
+      }
+      return 'grey';
+    },
+  },
+};
+</script>
+
+<style scoped>
+.round-key {
+  margin: 0 auto;
+  padding: 0;
+  width: 2.2em;
+  height: 2.2em;
+  border: 1px solid;
+  border-radius: 1.1em;
+  text-align: center;
+  line-height: 2.2em;
+  font-size: 1.5em;
+  font-weight: bold;
+  box-shadow: 0 3px 5px 1px gray;
+  cursor: pointer;
+}
+
+.orange {
+  border-color: #eb6434;
+  background-color: #eb6434;
+}
+
+.grey {
+  color: #eb6434;
+  border-color: #7a7a7a;
+  background-color: #7a7a7a;
+}
+
+.blank {
+  box-shadow: none;
+  border-color: transparent;
+  background: none;
+  cursor: auto;
+}
+
+.round-key:active {
+  box-shadow: none;
+}
+</style>
